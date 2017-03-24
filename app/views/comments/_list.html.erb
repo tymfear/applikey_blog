@@ -1,0 +1,5 @@
+<ul class="list-group" id="<%= list_id %>">
+  <% comments.each do |comment| %>
+    <%= render 'comments/comment', comment: comment %>
+  <% end %>
+</ul>

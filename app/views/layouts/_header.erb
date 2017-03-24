@@ -1,0 +1,26 @@
+<% if @current_user %>
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button"
+            data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">AppliKey Blog</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+        <li class="nav-item <%= 'active' if current_page? action: :index, controller: :articles %>">
+          <%= link_to 'Articles', articles_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item <%= 'active' if current_page? action:     :show,
+                                                          controller: :users,
+                                                          id:         @current_user.id %>">
+          <%= link_to 'My Profile', @current_user, class: 'nav-link' %>
+        </li>
+      </ul>
+      <%= link_to 'Sign Out', signout_path,
+                  method: :delete,
+                  class:  'btn btn-outline-success my-2 my-sm-0' %>
+    </div>
+  </nav>
+<% end %>

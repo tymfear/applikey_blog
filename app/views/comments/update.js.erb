@@ -1,0 +1,13 @@
+<% if @comment.errors.blank? %>
+
+$('#comment-body-<%= @comment.id %>').html('<%= @comment.body %>');
+
+<% else %>
+var errors = '';
+
+<% @comment.errors.full_messages.each do |message| %>
+errors += '<span class="badge badge-pill badge-danger"><%= message %></span>'
+<% end %>
+
+$('#comment-error-<%= @comment.id %>').html(errors);
+<% end %>

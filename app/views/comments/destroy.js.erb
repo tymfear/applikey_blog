@@ -1,0 +1,5 @@
+var li = $('li#comment-<%= @comment.id %>');
+
+li.fadeOut(200, function(){
+  li.remove()
+});

@@ -1,0 +1,24 @@
+<% if @comment.errors.blank? %>
+
+<% if @comment.comment_id.nil? %>
+$('<%= j render @comment %>').hide().prependTo('#comments-list').fadeIn();
+
+$("#article-comment").val('');
+<% else %>
+$('<%= j render @comment %>')
+  .hide()
+  .prependTo('#comments-list-<%= @comment.comment_id %>')
+  .fadeIn();
+
+$("#article-comment-<%= @comment.comment_id %>").val('');
+<% end %>
+
+<% else %>
+var errors = '';
+
+<% @comment.errors.full_messages.each do |message| %>
+errors += '<span class="badge badge-pill badge-danger"><%= message %></span>';
+<% end %>
+
+$('#comment-error-<%= @comment.comment_id %>').html(errors);
+<% end %>

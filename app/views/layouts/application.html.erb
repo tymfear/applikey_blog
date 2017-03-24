@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AppliKey Blog | <%= yield(:title) %></title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<header>
+  <%= render 'layouts/header' %>
+</header>
+<div class="container" id="main-container">
+
+
+  <% if flash[:notice] %>
+      <div class="alert alert-success"><%= flash[:notice] %></div>
+  <% end %>
+  <% if flash[:error] %>
+      <div class="alert alert-danger"><%= flash[:error] %></div>
+  <% end %>
+  <%= yield %>
+</div>
+</body>
+</html>

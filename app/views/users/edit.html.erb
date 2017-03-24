@@ -1,0 +1,4 @@
+<%= content_for :title, "Edit My Profile" %>
+<h1><%= yield(:title) %></h1>
+
+<%= render 'form', user: @user %>
