@@ -1,5 +1,5 @@
 $('#comment-body-<%= @comment.id %>')
   .html(
-    '<%= j render(partial: 'form', locals: {article: @comment.article,comment: @comment}) %>'
+    '<%= j render(partial: 'form', locals: {article: @comment.article, comment: @comment}) %>'
   );
 

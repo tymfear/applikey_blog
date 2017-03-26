@@ -15,8 +15,8 @@
   </div>
 
   <div class="col-md-10">
-    <div id="comment-body-<%= comment.id %>">
-      <%= comment.body %>
+    <div>
+      <div id="comment-body-<%= comment.id %>"><%= comment.body %></div>
       <div class="text-right timestamp">
         Commented <%= distance_of_time_in_words Time.now, comment.created_at %> ago
       </div>
