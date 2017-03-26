@@ -1,20 +1,22 @@
 <%= content_for :title, @article.title %>
 
 <div class="card">
-  <div class="card-header">
-    Author:
-    <%= @article.user.username %>
-    <% if @article.user.avatar_data.present? %>
-      <img src="<%= @article.user.avatar_data %>"
-           alt="user avatar" class="avatar-thumb">
-    <% end %>
+  <div class="card-header d-flex justify-content-between ">
+    <div class="p-2 bd-highlight align-self-baseline">
+      Author: <%= @article.user.username %> <%= user_avatar @article.user %>
+    </div>
+    <div class="p-2 bd-highlight align-self-baseline">
+      Created: <%= distance_of_time_in_words Time.now, @article.created_at %> ago
+    </div>
+
   </div>
   <div class="card-block">
     <h4 class="card-title"><%= @article.title %></h4>
     <p class="card-text"><%= @article.body %></p>
+
     <% if my_item? @article %>
-      <%= link_to 'Edit', [:edit, @article], class: 'card-link' %>
-      <%= link_to 'Remove', @article, method: :delete, class: 'card-link' %>
+        <%= link_to 'Edit', [:edit, @article], class: 'card-link' %>
+        <%= link_to 'Delete', @article, method: :delete, class: 'card-link' %>
     <% end %>
   </div>
 
@@ -23,6 +25,6 @@
 
     <hr>
     <h3 class="h3">Comments</h3>
-    <%= render 'comments/list', comments: @article.comments.top, list_id: 'comments-list' %>
+    <%= render 'comments/list', parent_id: nil, list_id: 'comments-list' %>
   </div>
 </div>

@@ -10,8 +10,7 @@ class User < ApplicationRecord
   validates :username, length: { maximum: 16 }
 
   validate :avatar_data_size
-
-
+  
   delegate :convert, to: Custom::Helpers::Base64FromFile, prefix: :avatar
 
   def avatar=(file)
@@ -24,7 +23,7 @@ class User < ApplicationRecord
     return if avatar_data.blank?
 
     if avatar_data.bytesize > 2.megabytes
-      errors.add :avatar, 'size should be less than 2MB'
+      errors.add :avatar, I18n.t('errors.user.avatar')
     end
   end
 end

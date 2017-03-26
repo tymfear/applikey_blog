@@ -1,29 +1,32 @@
 <li class="list-group-item row" id="comment-<%= comment.id %>">
   <div class="col-md-2">
-
     <div class="col-8">
       <%= comment.user.username %>
-      <% if comment.user.avatar_data.present? %>
-        <img src="<%= comment.user.avatar_data %>"
-             alt="user avatar" class="avatar-thumb">
-      <% end %>
+      <%= user_avatar comment.user %>
     </div>
+
     <% if my_item? comment %>
-      <div class="col-4">
-        <%= link_to 'Edit', [:edit, comment.article, comment], remote: true %>
-        <%= link_to 'Delete', [comment.article, comment],
-                    method: :delete, remote: true %>
-      </div>
+        <div class="col-4">
+          <%= link_to 'Edit', [:edit, comment.article, comment], remote: true %>
+          <%= link_to 'Delete', [comment.article, comment],
+                      method: :delete, remote: true %>
+        </div>
     <% end %>
   </div>
 
   <div class="col-md-10">
     <div id="comment-body-<%= comment.id %>">
       <%= comment.body %>
+      <div class="text-right timestamp">
+        Commented <%= distance_of_time_in_words Time.now, comment.created_at %> ago
+      </div>
     </div>
     <hr>
     <%= render 'comments/form', article: @article, comment: Comment.new(parent: comment) %>
 
-    <%= render 'comments/list', comments: comment.children, list_id: "comments-list-#{comment.id}" %>
+
+    <%= render 'comments/list',
+               list_id:  "comments-list-#{comment.id}",
+               parent_id: comment.id %>
   </div>
 </li>

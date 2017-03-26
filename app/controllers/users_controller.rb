@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :load_user, only: %i(show edit update)
   before_action :authorize, only: %i(show edit update)
   before_action :check_current_user, only: %i(new create)
 
@@ -23,18 +22,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update user_params
+    current_user.update user_params
 
-    return render :edit if @user.errors.any?
+    return render :edit if current_user.errors.any?
 
-    redirect_to @user, notice: t('success.update', model: 'User')
+    redirect_to current_user, notice: t('success.update', model: 'User')
   end
 
   private
-  def load_user
-    @user = User.find(params[:id])
-  end
-
+  
   def user_params
     params.require(:user)
       .permit %i(username email password password_confirmation avatar)

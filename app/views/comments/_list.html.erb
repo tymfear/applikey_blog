@@ -1,5 +1,5 @@
 <ul class="list-group" id="<%= list_id %>">
-  <% comments.each do |comment| %>
-    <%= render 'comments/comment', comment: comment %>
-  <% end %>
+  <% @comments[parent_id].each do |comment| %>
+      <%= render 'comments/comment', comment: comment %>
+  <% end if @comments&.fetch parent_id, nil  %>
 </ul>

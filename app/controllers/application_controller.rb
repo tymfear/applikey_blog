@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_current_user
-    redirect_to @current_user if current_user
+    redirect_to current_user if current_user
   end
 
   def my_item?(record)

@@ -1,0 +1,9 @@
+<% if record.errors.any? %>
+    <ul class="list-group">
+      <% record.errors.full_messages.each do |message| %>
+          <li class="list-group-item list-group-item-danger">
+            <%= message %>
+          </li>
+      <% end %>
+    </ul>
+<% end %>

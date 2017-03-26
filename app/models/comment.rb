@@ -1,27 +1,25 @@
 class Comment < ApplicationRecord
-  has_many :children, class_name: 'Comment', dependent: :destroy
-
+  has_many :comments, dependent: :destroy
+  
   belongs_to :user
   belongs_to :article
-  belongs_to :parent, class_name: 'Comment',
-             foreign_key: :comment_id, optional: true
+  belongs_to :comment, optional: true
 
+  alias_attribute :parent, :comment
+  alias_attribute :parent_id, :comment_id
+  
   validate :parent_comment
-
+  
   validates :body, presence: true, length: { maximum: 256 }
-
-  default_scope { order id: :desc}
-
-  scope :by_article, -> (id) { where article_id: id }
-  scope :top, ->  { where comment_id: nil }
-
+  
+  default_scope { order id: :desc }
+  
   private
-
+  
   def parent_comment
     return if parent.blank?
-
-    unless article_id.eql? parent.article_id
-      errors.add :parent, 'comment should belong to the same article'
-    end
+    return if article_id == parent.article_id
+    
+    errors.add :parent, I18n.t('errors.comment.parent')
   end
 end
