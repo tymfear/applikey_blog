@@ -37,7 +37,9 @@
     <% end %>
 
     <div class="actions">
-      <%= f.submit 'Sign Up', class: 'btn btn-success' if action_name.eql? 'new' %>
-      <%= f.submit 'Update Profile', class: 'btn btn-success' if action_name.eql? 'edit' %>
+      <%= f.submit 'Sign Up',
+                   class: 'btn btn-success' if %w(new create).include? action_name %>
+      <%= f.submit 'Update Profile',
+                   class: 'btn btn-success' if %w(edit update).include? action_name %>
     </div>
 <% end %>

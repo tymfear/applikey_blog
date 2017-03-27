@@ -25,6 +25,13 @@
 
     <hr>
     <h3 class="h3">Comments</h3>
+    <% if @comments.any? %>
     <%= render 'comments/list', parent_id: nil, list_id: 'comments-list' %>
+      <% else %>
+      <hr>
+        <div class="text-center">
+          Nobody commented on this article yet...
+        </div>
+      <% end %>
   </div>
 </div>
